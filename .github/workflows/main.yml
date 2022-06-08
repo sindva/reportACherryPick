@@ -10,6 +10,8 @@ jobs:
     if: github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: main
       - uses: actions/checkout@v3
         with:
           ref: fluor

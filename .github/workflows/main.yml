@@ -7,6 +7,7 @@ on:
 jobs:
   cherry_pick_release_v1_0:
     runs-on: ubuntu-latest
+    permissions: write-all
     name: Cherry pick into fluor
     steps:
       - name: Checkout

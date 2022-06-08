@@ -14,4 +14,4 @@ jobs:
         with:
           ref: fluor
       - name: Run a one-line script
-        run: git cherry-pick ${{ github.event.pull_request.head.sha }}
+        run: git cherry-pick bcc3e87

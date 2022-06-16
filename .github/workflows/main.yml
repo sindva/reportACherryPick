@@ -1,3 +1,6 @@
+permissions:
+  issues: write
+  pull-requests: write
 on:
   pull_request:
     branches:
@@ -5,19 +8,38 @@ on:
     types: ["closed"]
 
 jobs:
-  cherry_pick_release_v1_0:
+  cherry_pick_fluor:
     runs-on: ubuntu-latest
     permissions: write-all
     name: Cherry pick into fluor
+    if: contains(github.event.pull_request.milestone.title, 'fluor') || contains(github.event.pull_request.milestone.title, 'palladium')
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Cherry pick into release-v1.0
-        uses: carloscastrojumo/github-cherry-pick-action@v1.0.1
+      - name: Cherry pick into fluor
+        uses: carloscastrojumo/github-cherry-pick-action@v1.0.2
         with:
           branch: fluor
+          labels: |
+            cherry-pick
+          reviewers: |
+            aReviewerUser
+  cherry_pick_palladium:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    name: Cherry pick into  palladium
+    if: contains(github.event.pull_request.milestone.title, 'palladium')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Cherry pick into palladium
+        uses: carloscastrojumo/github-cherry-pick-action@v1.0.2
+        with:
+          branch: palladium
           labels: |
             cherry-pick
           reviewers: |
